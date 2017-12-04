@@ -1,0 +1,111 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>GiftTastic</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+<body>
+	
+
+	<div class="container">
+    <h1>Outdoor Activities</h1>
+
+     <button id="waterSkiing-button">Water Skiing</button> -->
+	 <button id="snowBoarding-button">Snow Boarding</button> -->
+	 <button id="surfing-button">Surfing</button> -->
+	 <button id="bungeeJumping-button">Bungee Jumping</button> -->
+
+	<div id="topics-Activities"></div>
+
+	
+	<div id="buttons-Activities"></div>
+
+	<form id="activities-form">
+      <label for="activity-input">Add an Activity</label>
+      <input type="text" id="activity-input"><br>
+
+      <input id="add-movie" type="submit" value="Submit">
+    </form>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">		
+
+	var topicsArray = ["waterSkiing","snowBoarding","surfing","bungeeJumping"];
+
+
+    function giphyAjaxCall() {
+
+	var topics = $(this).attr("data-name");
+
+     // API  may be formatted wrong, because it is not working
+     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=AEhtELvcgB8IF89sdwEkLAfuBAuVSv0l&q=surfing&limit=10&offset=0&rating=G&lang=en";
+
+
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).done(function(response) {
+          console.log(response)
+        });
+      }
+      // buttons are not displaying on page so I created buttons id's
+
+       function renderButtons() {
+
+      $("buttons-Activities").empty();
+
+      for (var i = 0; i < topicsArray.length; i++) {
+
+      var a = $("<button>");
+
+      a.addClass("topics");
+
+      a.attr("data-name", topicsArray[i]);
+
+      a.text(topicsArray[i]);
+
+      $("#buttons-Activities").append(a);
+     }  
+    }
+
+     $("#add-topics").on("click", function(event) {
+        event.preventDefault();
+
+     var topics = $("#topics-input").val().trim();
+
+     topics.push(topics);
+      console.log(topics)
+ 		
+ 	 renderButtons();   
+    });
+
+    $(document).on("click", "#surfing-button", giphyAjaxCall);
+     renderButtons();
+   // if esle code for pausing GIPHY, I need to add function to add 
+   // var state = $(this).attr ("data-state")
+
+       // if ( state==="still") { 
+         // $(this).attr("src", $(this).attr ("data-animate") );
+         // $(this).attr("data-state", "animate");
+
+       // } else {
+         // $(this).attr("src", $(this).attr ("data-still") );
+         // $(this).attr("data-state", "still");
+
+
+    </script>
+
+</div>
+
+
+
+      
+       
+	
+	
+		
+</body>
+</html>
