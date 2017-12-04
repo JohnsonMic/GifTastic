@@ -12,15 +12,15 @@
 	<div class="container">
     <h1>Outdoor Activities</h1>
 
-     <button id="waterSkiing-button">Water Skiing</button> -->
-	 <button id="snowBoarding-button">Snow Boarding</button> -->
-	 <button id="surfing-button">Surfing</button> -->
-	 <button id="bungeeJumping-button">Bungee Jumping</button> -->
+     <button class="button" id="waterSkiing-button" data-name="waterSkiing">Water Skiing</button> 
+	 <button class="button" id="snowBoarding-button" data-name="snowBoarding">Snow Boarding</button> 
+	 <button  class="button" id="surfing-button" data-name="surfing">Surfing</button> 
+	 <button class="button" id="bungeeJumping-button" data-name="bungeeJumping">Bungee Jumping</button>
 
 	<div id="topics-Activities"></div>
 
 	
-	<div id="buttons-Activities"></div>
+	
 
 	<form id="activities-form">
       <label for="activity-input">Add an Activity</label>
@@ -82,7 +82,7 @@
  	 renderButtons();   
     });
 
-    $(document).on("click", "#surfing-button", giphyAjaxCall);
+    $(document).on("click", ".button", giphyAjaxCall);
      renderButtons();
    // if esle code for pausing GIPHY, I need to add function to add 
    // var state = $(this).attr ("data-state")
