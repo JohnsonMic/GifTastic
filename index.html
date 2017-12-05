@@ -26,7 +26,7 @@
       <label for="activity-input">Add an Activity</label>
       <input type="text" id="activity-input"><br>
 
-      <input id="add-movie" type="submit" value="Submit">
+      <input id="add-topic" type="submit" value="Submit">
     </form>
 
 
@@ -40,19 +40,53 @@
 
 	var topics = $(this).attr("data-name");
 
-     // API  may be formatted wrong, because it is not working
-     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=AEhtELvcgB8IF89sdwEkLAfuBAuVSv0l&q=surfing&limit=10&offset=0&rating=G&lang=en";
+
+	function giftControls(){
+      var state = $(this).attr("data-state");
+      
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+     
+     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=AEhtELvcgB8IF89sdwEkLAfuBAuVSv0l&q="+topics+" &limit=10&offset=0&rating=G&lang=en";
 
 
       $.ajax({
           url: queryURL,
           method: "GET"
         }).done(function(response) {
-          console.log(response)
+          console.log(response.data)
+          for (var i = 0; i < response.data.length; i++)
+          	console.log (response.data[i].url)
+
+         <img.attr('src',results[i]images.url]>);
+         
+         	var images= $('<img>');
+            
+            images.attr('src',response.data[i].images.fixed_height_still.url);
+            images.attr('data-still',response.data[i].images.fixed_height_still.url);
+            images.attr('data-animate',response.data[i].images.fixed_height.url);
+
+			images.attr('class','gif');
+
+
+            $('#pics').prepend(images);
+
+         
+          
+
+          	//2. put attribute of src on it
+          	//3. make src = to response.data[i].url
+          	//4. append each <img> to your page
+          
         });
       }
-      // buttons are not displaying on page so I created buttons id's
-
+      
+      // images are displaying on page
        function renderButtons() {
 
       $("buttons-Activities").empty();
@@ -83,6 +117,7 @@
     });
 
     $(document).on("click", ".button", giphyAjaxCall);
+
      renderButtons();
    // if esle code for pausing GIPHY, I need to add function to add 
    // var state = $(this).attr ("data-state")
